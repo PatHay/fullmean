@@ -1,0 +1,50 @@
+<h3><a [routerLink]="['']">Logout</a></h3>
+<h1>New Appointment</h1>
+
+
+<form #myForm='ngForm' (submit)="onSubmit()">
+
+    <label for="date">Date: </label>
+    <input
+    min = "{{ tomorrow | date:'yyyy-MM-dd' }}"
+    type="date" 
+    name="date" 
+    [(ngModel)]="newAppt.date" 
+    required
+    #date="ngModel">
+    <div *ngIf="!date.valid && !date.pristine">You must select a date</div>
+
+    <label for="time">Time: </label>
+    <select name="time available"
+    required
+    #time="ngModel"
+    [(ngModel)]="newAppt.time" >
+        <option value="8">8:00 AM</option>
+        <option value="9">9:00 AM</option>
+        <option value="10">10:00 AM</option>
+        <option value="11">11:00 AM</option>
+        <option value="12">12:00 PM</option>
+        <option value="13">1:00 PM</option>
+        <option value="14">2:00 PM</option>
+        <option value="15">3:00 PM</option>
+        <option value="16">4:00 PM</option>
+        <option value="17">5:00 PM</option>
+    </select>
+    <div *ngIf="!date.valid && !date.pristine">You must select a time</div>
+
+    <label for="complaint">Complaint: </label>
+    <input
+    type="text" 
+    name="complaint" 
+    [(ngModel)]="newAppt.complaint" 
+    required 
+    minlength="10"
+    #complaint="ngModel">
+    <div *ngIf="!complaint.valid && !complaint.pristine">Complaint Cannot be blank and must be at least 10 characters long!</div>
+
+  
+
+    <button [routerLink]="['/appointments']">Cancel</button>
+    <button type="submit" value="submit" [hidden]="!myForm.valid">Add Appointment</button><br>
+  </form>
+  <p>{{ newAppt.date }}</p>

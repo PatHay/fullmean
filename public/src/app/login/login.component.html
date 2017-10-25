@@ -1,0 +1,15 @@
+<h1>Doctor's Office Login</h1>
+
+<form (submit)="onSubmit()" #myForm='ngForm'>
+    <div class="form-group">
+      <label>Your Full Name:</label>
+      <input
+      type="text" 
+      name="name" 
+      required
+      [(ngModel)]="user"
+      #login = "ngModel">
+      <button type="submit" value="submit" [hidden]="!login.valid">Login</button>
+    </div>
+    <div *ngIf="!login.valid && !login.pristine">Your name cannot be blank!</div>    
+</form>
